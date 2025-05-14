@@ -3,50 +3,49 @@
 
 #include <stdbool.h> 
 
-#define MAX_VAL 100 //100 es el max val de la pila 
+#define MAX_VAL 4 //tamaño max pila
 
-typedef int stackItem; //tipo de dato de los elems de la pila
+typedef int stackItem; //tipo de elems en la pila
+typedef struct stack_t stack_t; //estructura de la pila
 
-//tipo de dato de la pila
-typedef struct {
-    stackItem data[MAX_VAL]; //almacena los elementos de la pila
-    int top; // indice del elem sup del stack
-} stack;
+stack_t* createStack();
 
+void destroyStack(stack_t*); 
+
+void push(stack_t* pila, stackItem valor);
 /**
  * @brief Agrega un elemento al stack.
- * @param stack Puntero al stack donde se agregará el elemento.
+ * @param pila Puntero al stack donde se agregará el elemento.
  * @param valor Valor del elemento a agregar.
  * @pre El stack no debe estar lleno (IsFull(stack) == false).
  * @post El elemento se agrega al tope del stack.
  */
-void push(stack* pila, stackItem valor);
 
+stackItem pop(stack_t* pila);
 /**
  * @brief Extrae y devuelve el elemento superior del stack.
- * @param stack Puntero al stack del cual se eliminará el elemento.
+ * @param pila Puntero al stack del cual se eliminará el elemento.
  * @return El valor del elemento eliminado.
  * @pre El stack no debe estar vacío (IsEmpty(stack) == false).
  * @post El elemento superior se elimina del stack.
  */
-stackItem pop(stack* pila);
 
+bool isEmpty(const stack_t* pila);
 /**
  * @brief Verifica si el stack está vacío.
- * @param stack Puntero al stack a verificar.
+ * @param pila Puntero al stack a verificar.
  * @return true si el stack está vacío, false en caso contrario.
  * @pre Ninguna.
  * @post No modifica el estado del stack.
  */
-bool isEmpty(stack* pila);
 
+bool isFull(const stack_t* pila);
 /**
  * @brief Verifica si el stack está lleno.
- * @param stack Puntero al stack a verificar.
+ * @param pila Puntero al stack a verificar.
  * @return true si el stack está lleno, false en caso contrario.
  * @pre Ninguna.
  * @post No modifica el estado del stack.
  */
-bool isFull(stack* pila);
 
 #endif //guardas de inclusion

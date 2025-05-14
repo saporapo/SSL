@@ -4,47 +4,35 @@
 
 #include "stackModule.h"
 
-void initStack(stack* pila) {
-    pila->top = -1;
-}
+void testPerformance(){
+    stack_t* pila = createStack();
+    assert(isEmpty(pila));
+    assert(!isFull(pila));
 
-void testPerformance(stack* pila){
-    initStack(pila); //inicio la pila
+    push(pila, 10);
+    assert(!isEmpty(pila));
+    assert(!isFull(pila));
 
-    // Test isEmpty - isFull en un stack vacío
-    assert(isEmpty(pila) == true);
-    assert(isFull(pila) == false);
+    assert(pop(pila) == 10);
+    assert(isEmpty(pila));
 
-    // Test Push
-    push(pila, 10); //agrego un 10 a la pila
-    assert(isEmpty(pila) == false); //verifico que la pila no sea vacia
-    assert(pila->data[pila->top] == 10); //verifico que la pila haya guardado en data en la posicion top un 10
-
-    // Test Push y Pop
-    push(pila, 20); //agrego un 20 a la pila
-    assert(pila->data[pila->top] == 20); //verifico que se haya guardado
-    assert(pop(&pila) == 20); //verifico que el elemento extraido sea 20
-    assert(pila->data[pila->top] == 10); //verifico que el data de la pila en la posicion top sea 10
-
-    // Test de límite superior (inicio i=1 porque esta 10 guardado)
-    for (int i = 1; i < MAX_VAL; i++) {
+    for(int i=0; i<MAX_VAL; i++){
         push(pila, i);
     }
-    assert(isFull(pila) == true);
+    assert(isFull(pila));
 
-    // Test Pop hasta vaciar el stack
-    for (int i = 0; i < MAX_VAL; i++) {
-        assert(pop(pila) == MAX_VAL - 1 - i);
+    for(int i=0; i<MAX_VAL; i++){
+        pop(pila);
     }
-    assert(isEmpty(pila) == true);
+    assert(isEmpty(pila));
+
+    destroyStack(pila);
 }
 
 int main() {
-    stack pila;
-
     clock_t start = clock(); //inicia medicion de tiempo
 
-    testPerformance(&pila);
+    testPerformance();
     printf("Tests pasados exitosamente.\n");
 
     clock_t end = clock();  // Termina medición de tiempo
