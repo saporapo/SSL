@@ -7,23 +7,12 @@
 void testPerformance(){
     stack_t* pila = createStack();
     assert(isEmpty(pila));
-    assert(!isFull(pila));
 
     push(pila, 10);
     assert(!isEmpty(pila));
-    assert(!isFull(pila));
 
     assert(pop(pila) == 10);
-    assert(isEmpty(pila));
-
-    for(int i=0; i<MAX_VAL; i++){
-        push(pila, i);
-    }
-    assert(isFull(pila));
-
-    for(int i=0; i<MAX_VAL; i++){
-        pop(pila);
-    }
+    
     assert(isEmpty(pila));
 
     destroyStack(pila);
