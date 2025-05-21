@@ -13,6 +13,7 @@ struct stack_t {
 
 stack_t* createStack() {
     stack_t* pila = malloc(sizeof(stack_t));
+    if(!pila) return NULL;
     pila->top = NULL;
     return pila;
 }
